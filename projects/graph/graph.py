@@ -33,7 +33,11 @@ class Graph:
         """
         Get all neighbors (edges) of a vertex.
         """
-        pass  # TODO
+        if vertex_id not in self.vertices:
+            print("That vertex does not yet exist")
+            return
+        else:
+            return self.vertices[vertex_id]
 
     def bft(self, starting_vertex):
         """
