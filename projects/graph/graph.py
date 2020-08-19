@@ -51,48 +51,31 @@ class Graph:
         """
         # Create an empty Queue and enqueue the starting_vertex
         queue = []
+        queue.append(starting_vertex)
         # Create an empty set to track visited verticies
-        visted_set = set()
+        visited_set = set()
         
         # while queue is not empty:
         while queue:
             # Get the current vertex (dequeue from queue)
-            current_vertex = starting_vertex
+            current_vertex = queue[0]
 
             # Check to see if the current vertex has not been visited. If it hasn't been visited:
+            if current_vertex not in visited_set:
                 # Print the current vertex
+                print(current_vertex)
                 # Mark the current vertex as being visited
                     # Add the current vertex to a visted_set
+                visited_set.add(current_vertex)
                 # Queue up all the neighbors of the current vertex (So we can visit them next)
+                current_neighbors = self.get_neighbors(current_vertex)
+                queue.append(current_neighbors)
             # If the current vertex has been visited:
+            if current_neighbors in visited_set:
                 # Pop it off of the queue
+                queue.pop(0)
+        
 
-
-
-
-
-        ################################ GOOGLED ################################
-        # # Mark all the vertices as not visited 
-        # visited = [False] * (len(self.vertices)) 
-  
-        # # Create a queue for BFS 
-        # queue = [] 
-  
-        # # Mark the source node as visited and enqueue it 
-        # queue.append(starting_vertex) 
-        # visited[starting_vertex] = True
-  
-        # while queue: 
-  
-        #     # Dequeue a vertex from queue and print it 
-        #     starting_vertex = queue.pop(0) 
-        #     print (starting_vertex, end = " ") 
-  
-        #     # Get all adjacent vertices of the dequeued starting_vertex. If a adjacent has not been visited, then mark it visited and enqueue it 
-        #     for i in self.vertices[starting_vertex]: 
-        #         if visited[i] == False: 
-        #             queue.append(i) 
-        #             visited[i] = True
 
     def dft(self, starting_vertex):
         """
@@ -226,7 +209,7 @@ if __name__ == '__main__':
         1, 2, 4, 3, 7, 6, 5
         1, 2, 4, 3, 7, 5, 6
     '''
-    # graph.bft(1)
+    graph.bft(1)
 
     # '''
     # Valid DFT paths:
