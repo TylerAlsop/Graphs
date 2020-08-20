@@ -194,7 +194,7 @@ class Graph:
             # Get the current vertex PATH (dequeue from queue)
             # SET THE CURRENT VERTEX TO THE LAST ELEMENT OF THE PATH
             current_path = stack.pop()
-            current_vertex = current_path[0]
+            current_vertex = current_path[len(current_path) - 1]
 
             # Check to see if the current vertex has not been visited. If it hasn't been visited:
             if current_vertex not in visted_vertices:
