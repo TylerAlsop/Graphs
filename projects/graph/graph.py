@@ -235,9 +235,6 @@ class Graph:
 
         if starting_vertex == destination_vertex:
             return path
-
-        # if path[len(path) - 1] == destination_vertex:
-        #     return path
         
         visited_vertices.add(starting_vertex)
 
@@ -249,21 +246,6 @@ class Graph:
                 if path_with_new_neighbor is not None:
                     return path_with_new_neighbor
         return None
-
-
-###################################################################
-        # if visited_vertices is None:
-        #     visited_vertices = set()
-            
-        # print(starting_vertex)
-
-        # visited_vertices.add(starting_vertex)
-
-        # neighbors = self.get_neighbors(starting_vertex)
-        
-        # for neighbor in neighbors:
-        #     if neighbor not in visited_vertices:
-        #         self.dft_recursive(neighbor, visited_vertices)
 
 
 if __name__ == '__main__':
