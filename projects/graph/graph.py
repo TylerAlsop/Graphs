@@ -144,7 +144,7 @@ class Graph:
         queue = Queue()
         queue.enqueue([starting_vertex])
         # Create an empty set to track visited verticies
-        visted_verticies = set()
+        visted_vertices = set()
         
         # while queue is not empty:
         while queue.size() > 0:
@@ -154,22 +154,24 @@ class Graph:
             current_vertex = current_path[len(current_path) - 1]
 
             # Check to see if the current vertex has not been visited. If it hasn't been visited:
-            if current_vertex not in visted_verticies:
+            if current_vertex not in visted_vertices:
                 # CHECK IF THE CURRENT VERTEX IS THE DESTINATION
                 if current_vertex == destination_vertex:
                     # IF IT IS, STOP AND RETURN
                     return current_path
                 # Mark the current vertex as being visited (Add the current vertex to a visted_set)
-                visted_verticies.add(current_vertex)
+                visted_vertices.add(current_vertex)
 
                 # Queue up NEW PATHS WITH EACH NEIGHBOR:
                 neighbors = self.get_neighbors(current_vertex)
                 for neighbor in neighbors:
                     # TAKE CURRENT PATH
+                    copy_of_current_path = list(current_path)
                     # APPEND THE NEIGHBOR TO IT
-                    current_path.append(neighbor)
+                    copy_of_current_path.append(neighbor)
+                    new_path = copy_of_current_path
                     # QUEUE UP NEW PATH
-                    queue.enqueue(current_path)
+                    queue.enqueue(new_path)
 
         # If the current_path[len(current_path -1)] == destination_vertex:
             # return current_path
