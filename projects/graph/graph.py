@@ -117,7 +117,48 @@ class Graph:
 
         This should be done using recursion.
         """
-        pass  # TODO
+        stack = Stack()
+        stack.push(starting_vertex)
+
+        visited_vertices = set()
+
+        for vertex in stack:
+            if vertex not in visited_vertices:
+                print(vertex)
+                visited_vertices.add(vertex)
+
+                neighbors = self.get_neighbors(vertex)
+                
+                if neighbor in neighbors not in visited_vertices:
+                    stack.push(neighbor)
+        self.dft_recursive(stack)
+
+
+        # Create an empty Stack and push the starting_vertex onto it
+        stack = Stack()
+        stack.push(starting_vertex)
+    
+        # Create an empty set to track visited verticies
+        visited_vertices = set()
+        
+        # while stack is not empty:
+        while stack.size() > 0:
+            # Get the current vertex (pop from stack)
+            current_vertex = stack.pop()
+
+            # Check to see if the current vertex has not been visited. If it hasn't been visited:
+            if current_vertex not in visited_vertices:
+                # Print the current vertex
+                print(current_vertex)
+                # Mark the current vertex as being visited
+                    # Add the current vertex to a visted_set
+                visited_vertices.add(current_vertex)
+                # Stack up all the neighbors of the current vertex (So we can visit them next)
+                neighbors = self.get_neighbors(current_vertex)
+
+                for neighbor in neighbors:
+                    if neighbor not in visited_vertices:
+                        stack.push(neighbor)
 
     def bfs(self, starting_vertex, destination_vertex):
         """
