@@ -58,7 +58,7 @@ class Graph:
         visited_vertices = set()
         
         # while queue is not empty:
-        while queue:
+        while queue.size() > 0:
             # Get the current vertex (dequeue from queue)
             current_vertex = queue.dequeue()
 
@@ -74,12 +74,7 @@ class Graph:
 
                 for neighbor in neighbors:
                     if neighbor not in visited_vertices:
-                        queue.enqueue(neighbors)
-
-            # If the current vertex has been visited:
-            if current_vertex in visited_vertices:
-                # Pop it off of the queue
-                queue.dequeue()
+                        queue.enqueue(neighbor)
 
 
         ########################## Without other class methods ##########################
