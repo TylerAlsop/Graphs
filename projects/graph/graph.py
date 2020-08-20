@@ -173,10 +173,8 @@ class Graph:
                     # QUEUE UP NEW PATH
                     queue.enqueue(new_path)
 
-        # If the current_path[len(current_path -1)] == destination_vertex:
-            # return current_path
-        if current_path[len(current_path) - 1] == destination_vertex:
-            return current_path
+        # if current_path[len(current_path) - 1] == destination_vertex:
+        #     return current_path
 
 
     def dfs(self, starting_vertex, destination_vertex):
