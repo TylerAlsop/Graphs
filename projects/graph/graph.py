@@ -183,7 +183,38 @@ class Graph:
         starting_vertex to destination_vertex in
         depth-first order.
         """
-        pass  # TODO
+        # Create an empty Stack and push the PATH TO THE starting_vertex to the stack
+        stack = Stack()
+        stack.push([starting_vertex])
+        # Create an empty set to track visited verticies
+        visted_vertices = set()
+        
+        # while queue is not empty:
+        while stack.size() > 0:
+            # Get the current vertex PATH (dequeue from queue)
+            # SET THE CURRENT VERTEX TO THE LAST ELEMENT OF THE PATH
+            current_path = stack.pop()
+            current_vertex = current_path[0]
+
+            # Check to see if the current vertex has not been visited. If it hasn't been visited:
+            if current_vertex not in visted_vertices:
+                # CHECK IF THE CURRENT VERTEX IS THE DESTINATION
+                if current_vertex == destination_vertex:
+                    # IF IT IS, STOP AND RETURN
+                    return current_path
+                # Mark the current vertex as being visited (Add the current vertex to a visted_set)
+                visted_vertices.add(current_vertex)
+
+                # Queue up NEW PATHS WITH EACH NEIGHBOR:
+                neighbors = self.get_neighbors(current_vertex)
+                for neighbor in neighbors:
+                    # TAKE CURRENT PATH
+                    copy_of_current_path = list(current_path)
+                    # APPEND THE NEIGHBOR TO IT
+                    copy_of_current_path.append(neighbor)
+                    new_path = copy_of_current_path
+                    # QUEUE UP NEW PATH
+                    stack.push(new_path)
 
     def dfs_recursive(self, starting_vertex, destination_vertex):
         """
@@ -256,10 +287,10 @@ if __name__ == '__main__':
     '''
     print(graph.bfs(1, 6))
 
-    # '''
-    # Valid DFS paths:
-    #     [1, 2, 4, 6]
-    #     [1, 2, 4, 7, 6]
-    # '''
-    # print(graph.dfs(1, 6))
+    '''
+    Valid DFS paths:
+        [1, 2, 4, 6]
+        [1, 2, 4, 7, 6]
+    '''
+    print(graph.dfs(1, 6))
     # print(graph.dfs_recursive(1, 6))
