@@ -244,7 +244,8 @@ class Graph:
         neighbors = self.get_neighbors(starting_vertex)
         for neighbor in neighbors:
             if neighbor not in visited_vertices:
-                path_with_new_neighbor = self.dfs_recursive(neighbor, destination_vertex, visited_vertices, path)
+                path_copy = list(path)
+                path_with_new_neighbor = self.dfs_recursive(neighbor, destination_vertex, visited_vertices, path_copy)
                 if path_with_new_neighbor is not None:
                     return path_with_new_neighbor
         return None
