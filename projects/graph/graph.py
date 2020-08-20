@@ -99,8 +99,7 @@ class Graph:
             if current_vertex not in visited_vertices:
                 # Print the current vertex
                 print(current_vertex)
-                # Mark the current vertex as being visited
-                    # Add the current vertex to a visted_set
+                # Mark the current vertex as being visited (Add the current vertex to a visted_set)
                 visited_vertices.add(current_vertex)
                 # Stack up all the neighbors of the current vertex (So we can visit them next)
                 neighbors = self.get_neighbors(current_vertex)
@@ -138,34 +137,44 @@ class Graph:
         starting_vertex to destination_vertex in
         breath-first order.
         """
-        pass  # TODO
+        
         #**** Check the code for bft and augment a few things ****#
 
         # Create an empty Queue and enqueue the PATH TO THE starting_vertex
-        # queue = []
+        queue = Queue()
+        queue.enqueue([starting_vertex])
         # Create an empty set to track visited verticies
-        # visted_set = set()
+        visted_verticies = set()
         
         # while queue is not empty:
-        # while queue:
+        while queue.size() > 0:
             # Get the current vertex PATH (dequeue from queue)
             # SET THE CURRENT VERTEX TO THE LAST ELEMENT OF THE PATH
+            current_path = queue.dequeue()
+            current_vertex = current_path[len(current_path) - 1]
 
             # Check to see if the current vertex has not been visited. If it hasn't been visited:
+            if current_vertex not in visted_verticies:
                 # CHECK IF THE CURRENT VERTEX IS THE DESTINATION
-                # IF IT IS, STOP AND RETURN
-
-                # Mark the current vertex as being visited
-                    # Add the current vertex to a visted_set
+                if current_vertex == destination_vertex:
+                    # IF IT IS, STOP AND RETURN
+                    return
+                # Mark the current vertex as being visited (Add the current vertex to a visted_set)
+                visted_verticies.add(current_vertex)
 
                 # Queue up NEW PATHS WITH EACH NEIGHBOR:
+                neighbors = self.get_neighbors([current_vertex])
+                for neighbor in neighbors:
                     # TAKE CURRENT PATH
                     # APPEND THE NEIGHBOR TO IT
+                    current_path.append(neighbor)
                     # QUEUE UP NEW PATH
-
+                    queue.enqueue(current_path)
 
         # If the current_path[len(current_path -1)] == destination_vertex:
             # return current_path
+        if current_path[len(current_path) - 1] == destination_vertex:
+            return current_path
 
 
     def dfs(self, starting_vertex, destination_vertex):
@@ -241,11 +250,11 @@ if __name__ == '__main__':
 
     graph.dft_recursive(1)
 
-    # '''
-    # Valid BFS path:
-    #     [1, 2, 4, 6]
-    # '''
-    # print(graph.bfs(1, 6))
+    '''
+    Valid BFS path:
+        [1, 2, 4, 6]
+    '''
+    print(graph.bfs(1, 6))
 
     # '''
     # Valid DFS paths:
