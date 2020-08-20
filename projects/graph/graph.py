@@ -49,31 +49,66 @@ class Graph:
         Print each vertex in breadth-first order
         beginning from starting_vertex.
         """
+
         # Create an empty Queue and enqueue the starting_vertex
-        queue = []
-        queue.append(starting_vertex)
+        queue = Queue()
+        queue.enqueue(starting_vertex)
+    
         # Create an empty set to track visited verticies
-        visited_set = set()
+        visited_vertices = set()
         
         # while queue is not empty:
         while queue:
             # Get the current vertex (dequeue from queue)
-            current_vertex = queue[0]
+            current_vertex = queue.dequeue()
 
             # Check to see if the current vertex has not been visited. If it hasn't been visited:
-            if current_vertex not in visited_set:
+            if current_vertex not in visited_vertices:
                 # Print the current vertex
                 print(current_vertex)
                 # Mark the current vertex as being visited
                     # Add the current vertex to a visted_set
-                visited_set.add(current_vertex)
+                visited_vertices.add(current_vertex)
                 # Queue up all the neighbors of the current vertex (So we can visit them next)
-                current_neighbors = self.get_neighbors(current_vertex)
-                queue.append(current_neighbors)
+                neighbors = self.get_neighbors(current_vertex)
+
+                for neighbor in neighbors:
+                    if neighbor not in visited_vertices:
+                        queue.enqueue(neighbors)
+
             # If the current vertex has been visited:
-            if current_neighbors in visited_set:
+            if current_vertex in visited_vertices:
                 # Pop it off of the queue
-                queue.pop(0)
+                queue.dequeue()
+
+
+        ########################## Without other class methods ##########################
+        # # Create an empty Queue and enqueue the starting_vertex
+        # queue = []
+        # starting_vertex = self.vertices[starting_vertex]
+        # queue.append(starting_vertex)
+        # # Create an empty set to track visited verticies
+        # visited_set = set()
+        
+        # # while queue is not empty:
+        # while queue:
+        #     # Get the current vertex (dequeue from queue)
+        #     current_vertex = queue.pop(0)
+
+        #     # Check to see if the current vertex has not been visited. If it hasn't been visited:
+        #     if current_vertex not in visited_set:
+        #         # Print the current vertex
+        #         print(current_vertex)
+        #         # Mark the current vertex as being visited
+        #             # Add the current vertex to a visted_set
+        #         visited_set.add(current_vertex)
+        #         # Queue up all the neighbors of the current vertex (So we can visit them next)
+        #         current_neighbors = self.get_neighbors(current_vertex)
+        #         queue.append(current_neighbors)
+        #     # If the current vertex has been visited:
+        #     if current_vertex in visited_set:
+        #         # Pop it off of the queue
+        #         queue.pop(0)
         
 
 
