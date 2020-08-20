@@ -225,27 +225,29 @@ class Graph:
         This should be done using recursion.
         """
 
-        if starting_vertex == destination_vertex:
-            return [starting_vertex]
-
         if visited_vertices is None:
             visited_vertices = set()
         
         if path is None:
-            path = [starting_vertex]
+            path = []
 
-        if path[len(path) - 1] == destination_vertex:
+        path.append(starting_vertex)
+
+        if starting_vertex == destination_vertex:
             return path
-        
-        if starting_vertex not in visited_vertices:
-            visited_vertices.add(starting_vertex)
-            neighbors = self.get_neighbors(starting_vertex)
-            for neighbor in neighbors:
-                copy_of_path = list(path)
-                copy_of_path.append(neighbor)
-                new_path = copy_of_path
-                self.dfs_recursive(neighbor, destination_vertex, visited_vertices, new_path)
 
+        # if path[len(path) - 1] == destination_vertex:
+        #     return path
+        
+        visited_vertices.add(starting_vertex)
+
+        neighbors = self.get_neighbors(starting_vertex)
+        for neighbor in neighbors:
+            if neighbor not in visited_vertices:
+                path_with_new_neighbor = self.dfs_recursive(neighbor, destination_vertex, visited_vertices, path)
+                if path_with_new_neighbor is not None:
+                    return path_with_new_neighbor
+        return None
 
 
 ###################################################################
