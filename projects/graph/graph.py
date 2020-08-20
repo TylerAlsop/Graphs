@@ -82,26 +82,32 @@ class Graph:
         Print each vertex in depth-first order
         beginning from starting_vertex.
         """
-        pass  # TODO
 
-        # Create an empty stack and stack the starting_vertex
-        stack = []
+        # Create an empty Stack and push the starting_vertex onto it
+        stack = Stack()
+        stack.push(starting_vertex)
+    
         # Create an empty set to track visited verticies
-        visted_set = set()
+        visited_vertices = set()
         
         # while stack is not empty:
-        while stack:
-            # Get the current vertex (un-stack from stack)
-            current_vertex = starting_vertex
+        while stack.size() > 0:
+            # Get the current vertex (pop from stack)
+            current_vertex = stack.pop()
 
             # Check to see if the current vertex has not been visited. If it hasn't been visited:
+            if current_vertex not in visited_vertices:
                 # Print the current vertex
+                print(current_vertex)
                 # Mark the current vertex as being visited
                     # Add the current vertex to a visted_set
-                # stack up all the neighbors of the current vertex (So we can visit them next)
-            # If the current vertex has been visited:
-                # Pop it off of the stack
+                visited_vertices.add(current_vertex)
+                # Stack up all the neighbors of the current vertex (So we can visit them next)
+                neighbors = self.get_neighbors(current_vertex)
 
+                for neighbor in neighbors:
+                    if neighbor not in visited_vertices:
+                        stack.push(neighbor)
 
 
     def dft_recursive(self, starting_vertex):
@@ -211,14 +217,15 @@ if __name__ == '__main__':
     '''
     graph.bft(1)
 
-    # '''
-    # Valid DFT paths:
-    #     1, 2, 3, 5, 4, 6, 7
-    #     1, 2, 3, 5, 4, 7, 6
-    #     1, 2, 4, 7, 6, 3, 5
-    #     1, 2, 4, 6, 3, 5, 7
-    # '''
-    # # graph.dft(1)
+    '''
+    Valid DFT paths:
+        1, 2, 3, 5, 4, 6, 7
+        1, 2, 3, 5, 4, 7, 6
+        1, 2, 4, 7, 6, 3, 5
+        1, 2, 4, 6, 3, 5, 7
+    '''
+    graph.dft(1)
+
     # # graph.dft_recursive(1)
 
     # # '''
