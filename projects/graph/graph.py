@@ -158,7 +158,7 @@ class Graph:
                 # CHECK IF THE CURRENT VERTEX IS THE DESTINATION
                 if current_vertex == destination_vertex:
                     # IF IT IS, STOP AND RETURN
-                    return
+                    return current_path
                 # Mark the current vertex as being visited (Add the current vertex to a visted_set)
                 visted_verticies.add(current_vertex)
 
