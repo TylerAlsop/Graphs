@@ -216,7 +216,7 @@ class Graph:
                     # QUEUE UP NEW PATH
                     stack.push(new_path)
 
-    def dfs_recursive(self, starting_vertex, destination_vertex):
+    def dfs_recursive(self, starting_vertex, destination_vertex, visited_vertices=None, path=None):
         """
         Return a list containing a path from
         starting_vertex to destination_vertex in
@@ -224,7 +224,44 @@ class Graph:
 
         This should be done using recursion.
         """
-        pass  # TODO
+
+        if starting_vertex == destination_vertex:
+            return [starting_vertex]
+
+        if visited_vertices is None:
+            visited_vertices = set()
+        
+        if path is None:
+            path = [starting_vertex]
+
+        if path[len(path) - 1] == destination_vertex:
+            return path
+        
+        if starting_vertex not in visited_vertices:
+            visited_vertices.add(starting_vertex)
+            neighbors = self.get_neighbors(starting_vertex)
+            for neighbor in neighbors:
+                copy_of_path = list(path)
+                copy_of_path.append(neighbor)
+                new_path = copy_of_path
+                self.dfs_recursive(neighbor, destination_vertex, visited_vertices, new_path)
+
+
+
+###################################################################
+        # if visited_vertices is None:
+        #     visited_vertices = set()
+            
+        # print(starting_vertex)
+
+        # visited_vertices.add(starting_vertex)
+
+        # neighbors = self.get_neighbors(starting_vertex)
+        
+        # for neighbor in neighbors:
+        #     if neighbor not in visited_vertices:
+        #         self.dft_recursive(neighbor, visited_vertices)
+
 
 if __name__ == '__main__':
     graph = Graph()  # Instantiate your graph
@@ -293,4 +330,4 @@ if __name__ == '__main__':
         [1, 2, 4, 7, 6]
     '''
     print(graph.dfs(1, 6))
-    # print(graph.dfs_recursive(1, 6))
+    print(graph.dfs_recursive(1, 6))
