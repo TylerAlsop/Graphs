@@ -163,7 +163,7 @@ class Graph:
                 visted_verticies.add(current_vertex)
 
                 # Queue up NEW PATHS WITH EACH NEIGHBOR:
-                neighbors = self.get_neighbors([current_vertex])
+                neighbors = self.get_neighbors(current_vertex)
                 for neighbor in neighbors:
                     # TAKE CURRENT PATH
                     # APPEND THE NEIGHBOR TO IT
