@@ -137,7 +137,7 @@ class Graph:
         starting_vertex to destination_vertex in
         breath-first order.
         """
-######################### My Code #########################
+#################### My Code From Day 1 ####################
         # # Create an empty Queue and enqueue the PATH TO THE starting_vertex
         # queue = Queue()
         # queue.enqueue([starting_vertex])
@@ -208,38 +208,72 @@ class Graph:
         starting_vertex to destination_vertex in
         depth-first order.
         """
-        # Create an empty Stack and push the PATH TO THE starting_vertex to the stack
-        stack = Stack()
-        stack.push([starting_vertex])
-        # Create an empty set to track visited verticies
-        visted_vertices = set()
+
+#################### My Code From Day 1 ####################
+
+        # # Create an empty Stack and push the PATH TO THE starting_vertex to the stack
+        # stack = Stack()
+        # stack.push([starting_vertex])
+        # # Create an empty set to track visited verticies
+        # visted_vertices = set()
         
-        # while queue is not empty:
+        # # while queue is not empty:
+        # while stack.size() > 0:
+        #     # Get the current vertex PATH (dequeue from queue)
+        #     # SET THE CURRENT VERTEX TO THE LAST ELEMENT OF THE PATH
+        #     current_path = stack.pop()
+        #     current_vertex = current_path[len(current_path) - 1]
+
+        #     # Check to see if the current vertex has not been visited. If it hasn't been visited:
+        #     if current_vertex not in visted_vertices:
+        #         # CHECK IF THE CURRENT VERTEX IS THE DESTINATION
+        #         if current_vertex == destination_vertex:
+        #             # IF IT IS, STOP AND RETURN
+        #             return current_path
+        #         # Mark the current vertex as being visited (Add the current vertex to a visted_set)
+        #         visted_vertices.add(current_vertex)
+
+        #         # Queue up NEW PATHS WITH EACH NEIGHBOR:
+        #         neighbors = self.get_neighbors(current_vertex)
+        #         for neighbor in neighbors:
+        #             # TAKE CURRENT PATH
+        #             copy_of_current_path = list(current_path)
+        #             # APPEND THE NEIGHBOR TO IT
+        #             copy_of_current_path.append(neighbor)
+        #             new_path = copy_of_current_path
+        #             # QUEUE UP NEW PATH
+        #             stack.push(new_path)
+
+
+################ Code From Class The Next Day ################
+        stack = Stack()
+        visited_vertices = set()
+
+        stack.push({
+            'current_vertex': starting_vertex,
+            'path': [starting_vertex]
+        })
+
         while stack.size() > 0:
-            # Get the current vertex PATH (dequeue from queue)
-            # SET THE CURRENT VERTEX TO THE LAST ELEMENT OF THE PATH
-            current_path = stack.pop()
-            current_vertex = current_path[len(current_path) - 1]
+            current_obj = stack.pop()
+            current_path = current_obj['path']
+            current_vertex = current_obj['current_vertex']
 
-            # Check to see if the current vertex has not been visited. If it hasn't been visited:
-            if current_vertex not in visted_vertices:
-                # CHECK IF THE CURRENT VERTEX IS THE DESTINATION
+            if current_vertex not in visited_vertices:
+
                 if current_vertex == destination_vertex:
-                    # IF IT IS, STOP AND RETURN
                     return current_path
-                # Mark the current vertex as being visited (Add the current vertex to a visted_set)
-                visted_vertices.add(current_vertex)
 
-                # Queue up NEW PATHS WITH EACH NEIGHBOR:
-                neighbors = self.get_neighbors(current_vertex)
-                for neighbor in neighbors:
-                    # TAKE CURRENT PATH
-                    copy_of_current_path = list(current_path)
-                    # APPEND THE NEIGHBOR TO IT
-                    copy_of_current_path.append(neighbor)
-                    new_path = copy_of_current_path
-                    # QUEUE UP NEW PATH
-                    stack.push(new_path)
+                visited_vertices.add(current_vertex)
+
+                for neighbor_vertex in self.get_neighbors(current_vertex):
+                    new_path = list(current_path)
+                    new_path.append(neighbor_vertex)
+
+                    stack.push({
+                        'current_vertex': neighbor_vertex,
+                        'path': new_path
+                        })
 
     def dfs_recursive(self, starting_vertex, destination_vertex, visited_vertices=None, path=None):
         """
