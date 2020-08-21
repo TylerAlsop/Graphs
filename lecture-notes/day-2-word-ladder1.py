@@ -31,9 +31,14 @@
 ################### Or we could start by building the structure first (seen below) ###################
 
 # Access the file of words
-word_file = open('words.txt', 'r')
-words = word_file.read().split("\n")
-word_file.close()
+import os
+import sys
+with open(os.path.join(sys.path[0], 'words.txt'), 'r') as f:
+    words = f.read().split("\n")
+
+# word_file = open('words.txt', 'r')
+# words = word_file.read().split("\n")
+# word_file.close()
 
 # Put our words in a set for O(1) lookup
 word_set = set()
