@@ -137,44 +137,69 @@ class Graph:
         starting_vertex to destination_vertex in
         breath-first order.
         """
+######################### My Code #########################
+        # # Create an empty Queue and enqueue the PATH TO THE starting_vertex
+        # queue = Queue()
+        # queue.enqueue([starting_vertex])
+        # # Create an empty set to track visited verticies
+        # visted_vertices = set()
         
-        #**** Check the code for bft and augment a few things ****#
+        # # while queue is not empty:
+        # while queue.size() > 0:
+        #     # Get the current vertex PATH (dequeue from queue)
+        #     # SET THE CURRENT VERTEX TO THE LAST ELEMENT OF THE PATH
+        #     current_path = queue.dequeue()
+        #     current_vertex = current_path[len(current_path) - 1]
 
-        # Create an empty Queue and enqueue the PATH TO THE starting_vertex
+        #     # Check to see if the current vertex has not been visited. If it hasn't been visited:
+        #     if current_vertex not in visted_vertices:
+        #         # CHECK IF THE CURRENT VERTEX IS THE DESTINATION
+        #         if current_vertex == destination_vertex:
+        #             # IF IT IS, STOP AND RETURN
+        #             return current_path
+        #         # Mark the current vertex as being visited (Add the current vertex to a visted_set)
+        #         visted_vertices.add(current_vertex)
+
+        #         # Queue up NEW PATHS WITH EACH NEIGHBOR:
+        #         neighbors = self.get_neighbors(current_vertex)
+        #         for neighbor in neighbors:
+        #             # TAKE CURRENT PATH
+        #             copy_of_current_path = list(current_path)
+        #             # APPEND THE NEIGHBOR TO IT
+        #             copy_of_current_path.append(neighbor)
+        #             new_path = copy_of_current_path
+        #             # QUEUE UP NEW PATH
+        #             queue.enqueue(new_path)
+
+################ Code From Class The Next Day ################
         queue = Queue()
-        queue.enqueue([starting_vertex])
-        # Create an empty set to track visited verticies
-        visted_vertices = set()
-        
-        # while queue is not empty:
+        visited_vertices = set()
+
+        queue.enqueue({
+            'current_vertex': starting_vertex,
+            'path': [starting_vertex]
+        })
+
         while queue.size() > 0:
-            # Get the current vertex PATH (dequeue from queue)
-            # SET THE CURRENT VERTEX TO THE LAST ELEMENT OF THE PATH
-            current_path = queue.dequeue()
-            current_vertex = current_path[len(current_path) - 1]
+            current_obj = queue.dequeue()
+            current_path = current_obj['path']
+            current_vertex = current_obj['current_vertex']
 
-            # Check to see if the current vertex has not been visited. If it hasn't been visited:
-            if current_vertex not in visted_vertices:
-                # CHECK IF THE CURRENT VERTEX IS THE DESTINATION
+            if current_vertex not in visited_vertices:
+
                 if current_vertex == destination_vertex:
-                    # IF IT IS, STOP AND RETURN
                     return current_path
-                # Mark the current vertex as being visited (Add the current vertex to a visted_set)
-                visted_vertices.add(current_vertex)
 
-                # Queue up NEW PATHS WITH EACH NEIGHBOR:
-                neighbors = self.get_neighbors(current_vertex)
-                for neighbor in neighbors:
-                    # TAKE CURRENT PATH
-                    copy_of_current_path = list(current_path)
-                    # APPEND THE NEIGHBOR TO IT
-                    copy_of_current_path.append(neighbor)
-                    new_path = copy_of_current_path
-                    # QUEUE UP NEW PATH
-                    queue.enqueue(new_path)
+                visited_vertices.add(current_vertex)
 
-        # if current_path[len(current_path) - 1] == destination_vertex:
-        #     return current_path
+                for neighbor_vertex in self.get_neighbors(current_vertex):
+                    new_path = list(current_path)
+                    new_path.append(neighbor_vertex)
+
+                    queue.enqueue({
+                        'current_vertex': neighbor_vertex,
+                        'path': new_path
+                        })
 
 
     def dfs(self, starting_vertex, destination_vertex):
