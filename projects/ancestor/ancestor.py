@@ -1,37 +1,35 @@
 
 def earliest_ancestor(ancestors, starting_node):
+
     ancestors_dict = {}
-    stack = []
-
-    stack.append(starting_node)
-
-    current_parents = []
 
     for item in ancestors:
-        item_key = item[0]
-        item_value = item[1]
-        if item_key not in ancestors_dict:
-            ancestors_dict[item_key] = set()
-        ancestors_dict[item_key].add(item_value)
-
-    print(f'Ancestors Dictionary: {ancestors_dict}')
-
-    # all_children = ancestors_dict.values()
-
-    # print(f'All Children: {all_children}')
-    
-    while len(stack) > 0:
-        current_node = stack.pop()
-
-        if current_node not in ancestors_dict.values():
-            return -1
+        if item[1] in ancestors_dict:
+            ancestors_dict[item[1]].append(item[0])
+ 
         else:
-            search_person = input(current_node)
-            for parent, children in ancestors_dict.items():
-                if children == search_person:
-                    current_parents.append(parent)
-                    print(f'Current Parents: {current_parents}')
+            ancestors_dict[item[1]] = [item[0]]
+    
+    if starting_node not in ancestors_dict:
+        return -1
+    
+    curr_parents = ancestors_dict[starting_node]
+        
+    while True:
+        new_parents = []
+        
+        for parent in curr_parents:
+            if parent in ancestors_dict:
+                new_parents = new_parents + ancestors_dict[parent]
 
+            if len(new_parents) == 0:
+                return curr_parents[0]
+
+            else:
+                
+                curr_parents = new_parents
+                
+    print(ancestors_dict)
 
 
 
