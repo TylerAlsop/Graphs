@@ -22,7 +22,6 @@ def earliest_ancestor(ancestors, starting_node):
         current_vertice = path[-1]
         print(f'Current Vertice: {current_vertice}')
 
-
         if (len(path) > max_len) or (len(path) == max_len and current_vertice < earliest_ancestor):
             earliest_ancestor = current_vertice
             max_len = len(path)
@@ -31,7 +30,6 @@ def earliest_ancestor(ancestors, starting_node):
             copy_of_path.append(item)
             queue.enqueue(copy_of_path)
         print(f'Path: {path}')
-        
         
     return earliest_ancestor
 
