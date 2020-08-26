@@ -44,7 +44,7 @@ class SocialGraph:
         self.last_id = 0
         self.users = {}
         self.friendships = {}
-        # !!!! IMPLEMENT THE TWO ITEMS BELOW:
+        # !!!! Impliement the two items below: Status: FINISHED
         # Add users
         for i in range(0, num_users):
             self.add_user(f"User {i+1}")
@@ -80,6 +80,8 @@ class SocialGraph:
         visited = {}  # Note that this is a dictionary, not a set
         # !!!! IMPLEMENT ME
 
+        
+
         return visited
 
 
@@ -92,11 +94,6 @@ class SocialGraph:
 
 if __name__ == '__main__':
     sg = SocialGraph()
-    # sg.add_user("Tyler")
-    # sg.add_user("Aimee")
-    # sg.add_user("Eric")
-    # sg.add_user("Rachel")
-    # sg.add_friendship(0, 1)
 
     sg.populate_graph(10, 2)
     print(sg.friendships)

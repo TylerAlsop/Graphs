@@ -1,6 +1,9 @@
 from room import Room
 from player import Player
 from world import World
+from util3 import Queue
+from graph3 import Graph
+
 
 import random
 from ast import literal_eval
@@ -19,6 +22,7 @@ map_file = "maps/main_maze.txt"
 # Loads the map into a dictionary
 room_graph=literal_eval(open(map_file, "r").read())
 world.load_graph(room_graph)
+
 
 # Print an ASCII map
 world.print_rooms()
